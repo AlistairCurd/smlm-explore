@@ -1,0 +1,9 @@
+name: smlm-explore
+channels:
+  - defaults
+dependencies:
+  - python
+  - matplotlib
+  - numpy
+  - scipy
+  - jupyter
