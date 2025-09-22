@@ -7,3 +7,6 @@ dependencies:
   - numpy
   - scipy
   - jupyter
+  - jupytext
+  - pandas
+prefix: C:\Users\fbsacu\AppData\Local\miniconda3\envs\smlm-explore
