@@ -17,9 +17,9 @@
 # ----------------------------------
 #
 
-# # IMPORTANT
-# # Disable autosave for Jupytext version control with a paired .py script
-# ## But manually saving the notebook frequently is still good
+# ## IMPORTANT
+# ## Disable autosave for Jupytext version control with a paired .py script
+# ### But manually saving the notebook frequently is still good
 
 # %autosave 0
 
