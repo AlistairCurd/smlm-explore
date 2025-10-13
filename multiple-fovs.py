@@ -35,7 +35,7 @@ import pandas as pd
 # Give the path here
 
 
-rawdata_dirpath = Path('C:/AutofluorescenceExp_CODI-0092_2025-09-19/blank_alc-ammonia/')
+rawdata_dirpath = Path('C:/Nephrin_CODI-0001_2025-10-06/30nm_locs/')
 
 # ## Load data
 #
@@ -76,6 +76,10 @@ fovnames
 for datatable in datatables:
     datatable['locprec-nm'] = (np.sqrt(datatable['var-x-nm2']) + np.sqrt(datatable['var-y-nm2'])) / 2
     datatable['psf-sigma-nm'] = (datatable['sigma-x-mean-nm'] + datatable['sigma-y-mean-nm']) / 2
+
+# ### Check again
+
+datatables[0]
 
 # ### Check localisation precision distribution for one fov
 
@@ -231,5 +235,41 @@ axes[len(datadir_paths_list) - 1, 1].set_xlabel('PSF sigma (nm)')
 # -
 
 fig.savefig('C:/Temp/locprec-and-psf-various-autofl-conditions.pdf', bbox_inches='tight')
+
+# # Filter data
+
+# ### Test/check on one FOV
+
+datatables[0].columns
+
+# +
+#Test
+
+datatable_in = datatables[0]
+datatable_out = datatable_in[datatable_in['locprec-nm'] < 15]
+datatable_out = datatable_out[datatable_out['outlier-score'] < 0.001]
+# -
+
+datatable_in.shape
+
+datatable_out.shape
+
+max(datatable_out['locprec-nm'])
+
+max(datatable_out['outlier-score'])
+
+# ### Iterate over directory and save
+# Not keeping every copy in memory as well, as sometimes work with large datasets
+
+# #### Output directory
+
+output_path = Path('C:/Nephrin_CODI-0001_2025-10-06/15nm_locs_p0-001')
+
+# ### Filter and save
+
+for counter, datatable_in in enumerate(datatables):
+    datatable_out = datatable_in[datatable_in['locprec-nm'] < 15]
+    datatable_out = datatable_out[datatable_out['outlier-score'] < 0.001]
+    datatable_out.to_csv(output_path / (fovnames[counter] + '.csv'), index=False)
 
 
