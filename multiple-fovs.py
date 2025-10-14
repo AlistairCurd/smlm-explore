@@ -35,7 +35,7 @@ import pandas as pd
 # Give the path here
 
 
-rawdata_dirpath = Path('C:/Nephrin_CODI-0001_2025-10-06/30nm_locs/')
+rawdata_dirpath = Path('C:/Nephrin_CODI-0079_2025-10-13/30nm_locs-p0-05/')
 
 # ## Load data
 #
@@ -254,6 +254,12 @@ datatable_in.shape
 
 datatable_out.shape
 
+max(datatable_in['locprec-nm'])
+
+max(datatable_in['outlier-score'])
+
+plt.hist(datatable_in['outlier-score'])
+
 max(datatable_out['locprec-nm'])
 
 max(datatable_out['outlier-score'])
@@ -263,7 +269,7 @@ max(datatable_out['outlier-score'])
 
 # #### Output directory
 
-output_path = Path('C:/Nephrin_CODI-0001_2025-10-06/15nm_locs_p0-001')
+output_path = Path('C:/Nephrin_CODI-0079_2025-10-13/15nm_locs_outliers0-001')
 
 # ### Filter and save
 
