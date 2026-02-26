@@ -35,7 +35,7 @@ import pandas as pd
 # Give the path here
 
 
-rawdata_dirpath = Path("C:/Autofluorescence-CRC-CODI-92_2025-11-11/50nm_locs-p0-05")
+rawdata_dirpath = Path("C:\\Collagen_CODI-0073_2026-02-24\\30nm_prec-p0-001\\locs")
 
 # ## Load data
 #
@@ -287,12 +287,12 @@ fig.savefig('C:/Temp/locprec-and-psf-various-autofl-conditions.pdf', bbox_inches
 
 datatables[0].columns
 
-max(datatables[0]['locprec-max-nm'])
+max(datatables[0]['locprec-mean-nm'])
 
 # +
 #Test
 
-datatable_in = datatables[0]
+datatable_in = datatables[10]
 datatable_out = datatable_in[datatable_in['locprec-max-nm'] < 15]
 datatable_mean_thresh = datatable_in[datatable_in['locprec-mean-nm'] < 15]
 # datatable_out = datatable_out[datatable_out['outlier-score'] < 0.001]
@@ -314,22 +314,28 @@ max(datatable_out['locprec-max-nm'])
 
 max(datatable_out['outlier-score'])
 
+max(datatable_mean_thresh['locprec-mean-nm'])
+
 max(datatable_mean_thresh['locprec-max-nm'])
+
+plt.hist(datatable_mean_thresh['locprec-mean-nm'])
 
 # ### Iterate over directory and save
 # Not keeping every copy in memory as well, as sometimes work with large datasets
 
 # #### Output directory
 
-output_path = Path("C:/Nephrin_CODI-01and79_2025-10-14/15nm-precmax1D_p001")
+output_path = Path("C:/Collagen_CODI-0073_2026-02-24/15nm-precxymean_p001/locs")
+if not output_path.exists():
+    output_path.mkdir(parents=True, exist_ok=False)
 
 # ### Filter and save
 
 for count, datatable_in in enumerate(datatables):
     if (count + 1) % 10 == 0:
         print(f'Dataset {count + 1} of {len(datatables)}...')
-    datatable_out = datatable_in[datatable_in['locprec-max-nm'] < 15]
-    max_prec = datatable_out['locprec-max-nm'].max()
+    datatable_out = datatable_in[datatable_in['locprec-mean-nm'] < 15]
+    max_prec = datatable_out['locprec-mean-nm'].max()
     if max_prec > 15:
         print(f'{fovnames[count]}: {max_prec} nm')
     # datatable_out = datatable_out[datatable_out['outlier-score'] < 0.001]
