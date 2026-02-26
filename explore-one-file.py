@@ -35,7 +35,7 @@ import pandas as pd
 
 # ## Data path
 
-rawdata_path = Path('C:/AutofluorescenceExp_CODI-0092_2025-09-19/blank_alc-ammonia/Blank_CRC_Ct3-2_Alc_Ammonia_fov1.csv')
+rawdata_path = Path("C:\\Nephrin_CODI-0079_2025-12-02\\15nm-precxymean_p001\\locs\\D0227_NEPHRIN_Glom4.csv")
 
 # ## Load data from .csv
 
@@ -67,5 +67,13 @@ plt.show()
 upper_photons_display = 30000
 plt.hist(datatable['intensity-mean-photons'], bins=30, color='xkcd:sea green', range=[0, upper_photons_display])
 plt.show()
+
+# ## Load data - pre-formatted (not ONI direct)
+
+datatable = pd.read_csv(rawdata_path)
+
+datatable
+
+plt.hist(datatable['locprec-mean-nm'], bins=30, color='xkcd:sea green')
 
 
